@@ -11,7 +11,7 @@
         <script>
                 function gettracks() {
                     var req = new XMLHttpRequest(); // HTTPでファイルを読み込むためのXMLHttpRrequestオブジェクトを生成
-                    req.open("get", "http://127.0.0.1:8000/tracks/", true); // アクセスするファイルを指定
+                    req.open("get", "https://vocalorecomm.herokuapp.com/tracks/", true); // アクセスするファイルを指定
                     req.send(null); // HTTPリクエストの発行
                     var picked_str;
                     req.onload = function(){
@@ -45,7 +45,7 @@
 
                 function getartists() {
                     var req = new XMLHttpRequest(); // HTTPでファイルを読み込むためのXMLHttpRrequestオブジェクトを生成
-                    req.open("get", "http://127.0.0.1:8000/artists/", true); // アクセスするファイルを指定
+                    req.open("get", "https://vocalorecomm.herokuapp.com/artists/", true); // アクセスするファイルを指定
                     req.send(null); // HTTPリクエストの発行
                     var picked_str;
                     req.onload = function(){
