@@ -19,7 +19,7 @@ with open('final_model.pickle', mode='rb') as f:
 artists_dic = {1: 'ピノキオピー', 2: 'DECO*27', 4: '鬱P',6: 'おてつ！', 7: 'みきとP', 8: '40mP', 9: 'ナユタン星人'}
 
 def artist_to_artist(artist):
-    con = sqlite3.connect('vocalo.db')     
+    con = sqlite3.connect('for_db.db')     
     cur = con.cursor()
     cur.execute('drop table items;')
     cur.execute(
