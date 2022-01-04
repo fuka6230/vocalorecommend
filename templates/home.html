@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+<link rel=stylesheet href={% static 'home.css' %}>     
+<script type="text/javascript"></script>
+        <script>
+                function gettracks() {
+                    var req = new XMLHttpRequest(); // HTTPでファイルを読み込むためのXMLHttpRrequestオブジェクトを生成
+                    req.open("get", "http://127.0.0.1:8000/tracks/", true); // アクセスするファイルを指定
+                    req.send(null); // HTTPリクエストの発行
+                    var picked_str;
+                    req.onload = function(){
+	            convertCSVtoArray(req.responseText); // 渡されるのは読み込んだCSVデータ
+                    }
+                }
+                
+                // 読み込んだCSVデータを二次元配列に変換する関数convertCSVtoArray()の定義
+                function convertCSVtoArray(str){ // 読み込んだCSVデータが文字列として渡される
+                    var result = [];
+                    var tmp = str.split("\n"); // 改行を区切り文字として行を要素とした配列を生成
+                 
+                    // 各行ごとにカンマで区切った文字列を要素とした二次元配列を生成
+                    for(var i=0;i<tmp.length;++i){
+                        result[i] = tmp[i].split(',');
+                    }
+                    var picked = result.map(item => item[3]);
+                    const picked2 = Array.from(new Set(picked));
+                    var new_picked = [];
+                    for (const elem of picked2){
+                        var a = new Object();
+                        a.label = elem;
+                        a.value = elem;
+                        new_picked.push(a)
+                    }
+                    $("#name").autocomplete({
+                        source: new_picked
+                    })
+                }
+
+
+                function getartists() {
+                    var req = new XMLHttpRequest(); // HTTPでファイルを読み込むためのXMLHttpRrequestオブジェクトを生成
+                    req.open("get", "http://127.0.0.1:8000/artists/", true); // アクセスするファイルを指定
+                    req.send(null); // HTTPリクエストの発行
+                    var picked_str;
+                    req.onload = function(){
+	            convertCSVtoArray2(req.responseText); // 渡されるのは読み込んだCSVデータ
+                    }
+                }
+                
+                // 読み込んだCSVデータを二次元配列に変換する関数convertCSVtoArray()の定義
+                function convertCSVtoArray2(str){ // 読み込んだCSVデータが文字列として渡される
+                    var result = [];
+                    var tmp = str.split("\n"); // 改行を区切り文字として行を要素とした配列を生成
+                    var new_picked = [];
+                    for (const elem of tmp){
+                        var a = new Object();
+                        a.label = elem;
+                        a.value = elem;
+                        new_picked.push(a)
+                    }
+                    $("#artist").autocomplete({
+                        source: new_picked
+                    })
+                }
+                
+
+                gettracks();
+                getartists();
+
+        </script>
+</head>
+<body>  
+<h1>ボカロPレコメンド</h1>
+<h2>あなたの好きな曲やアーティスト（もしくはボカロP）からおすすめのボカロPをレコメンドします。</h2>
+<h3>曲名から検索する</h3>
+<form action="{% url 'vocalo:form_name_view' %}" method="post">
+        {% csrf_token %}
+        <div></div>
+        <input type="text" id="name" name="name" placeholder="KING" class="name_form" autocomplete="on" list='name'>
+        <input type="submit" value="決定">
+        </div>
+</form>
+
+<h3>アーティストやボカロPから検索する</h3>
+<form action="{% url 'vocalo:form_artist_view' %}" method="post">
+        {% csrf_token %}
+        <div>
+        <input type="text" id="artist" name="artist" placeholder='Kanaria' class='artist'>
+        <input type="submit" value="決定">
+        </div>
+</form>
+<p>※結果の表示まで時間がかかる場合があります</p>
+<p class='signature'>Created by <a href="https://twitter.com/Yoshi_6230">@Yoshi_6230</a></p>
+</body>
+</html>

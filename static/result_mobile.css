@@ -1,0 +1,46 @@
+p {
+    text-align: center;
+}
+
+.top {
+    font-size: 60px;
+    position: relative;
+    top: 30px;
+}
+
+.result_name {
+    font-size: 120px;
+    background-color: #C0C0C0;
+}
+
+.niconico {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.youtube {
+    text-align: center;
+    display: block;
+    font-size: 25px;
+}
+
+.share {
+    text-align: center;
+}
+
+.twitter-share-button{
+    text-align: center;
+    width: 45px;
+    height: 12px
+}
+
+.blank {
+    margin-top: 50px;
+    font-size: x-large;
+}
+
+.before_page {
+    position: fixed;
+    bottom: 5px;
+    font-size: 30px;
+}

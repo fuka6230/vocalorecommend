@@ -1,0 +1,57 @@
+{% load static %}
+<head>
+    <link rel=stylesheet href={% static 'result.css' %}>
+</head>
+{% block content %}
+    <p class="top">あなたにおすすめのボカロPは...</p>
+    <p class="result_name">{{ result_name }}</p>
+    {% if result_name == 'ピノキオピー' %}
+    <div class='media'>
+    <iframe src="https://open.spotify.com/embed/artist/3b7jPCedJ2VH4l4rcOTvNC?utm_source=generator" width="70%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+    <iframe class="niconico" width="30%" height="160" src="https://ext.nicovideo.jp/thumb_user/865591" scrolling="no" style="border:solid 1px #CCC;" frameborder="0">ピノキオピー</iframe>
+    </div>
+    <a class="youtube" href="https://www.youtube.com/channel/UCMMBGMjrrWcRZmG_lW4jC-Q">{{ result_name }}のYouTubeチャンネルはこちらから</a>
+    {% elif result_name == 'ナユタン星人' %}
+    <div class='media'>
+    <iframe src="https://open.spotify.com/embed/artist/0U2Emr9cdZNcbqSoKoWb8c?utm_source=generator" width="70%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>    
+    <iframe class="niconico" width="30%" height="160" src="https://ext.nicovideo.jp/thumb_user/49716308" scrolling="no" style="border:solid 1px #CCC;" frameborder="0">ナユタン星人</iframe>
+    </div>
+    <a class="youtube" href="https://www.youtube.com/channel/UChK8kgGU767nKTxp4f4GD6g">{{ result_name }}のYouTubeチャンネルはこちらから</a>
+    {% elif result_name == '鬱P' %}
+    <div class='media'>
+    <iframe src="https://open.spotify.com/embed/artist/3Zo5u5IljPxQEfbNY2OgsX?utm_source=generator" width="70%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+    <iframe class="niconico" height="160" src="https://ext.nicovideo.jp/thumb_user/176618" scrolling="no" style="border:solid 1px #CCC;" frameborder="0">鬱P</iframe>
+    </div>
+    <a class="youtube" href="https://www.youtube.com/channel/UCkMsHxeWjiHQvhHAs33OCmw">{{ result_name }}のYouTubeチャンネルはこちらから</a>
+    {% elif result_name == 'おてつ！' %}
+    <div class='media'>
+    <iframe src="https://open.spotify.com/embed/artist/6nSvLYzj4aHpB31o9fpxZQ?utm_source=generator" width="70%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+    <iframe class="niconico" width="30%" height="160" src="https://ext.nicovideo.jp/thumb_user/2566558" scrolling="no" style="border:solid 1px #CCC;" frameborder="0">おてつ！</iframe>
+    </div>
+    <a class="youtube" href="https://www.youtube.com/user/otetsu0721">{{ result_name }}のYouTubeチャンネルはこちらから</a>
+    {% elif result_name == 'みきとP' %}
+    <div class='media'>
+    <iframe src="https://open.spotify.com/embed/artist/0iu8aSfeRUY5aUTLpEDo52?utm_source=generator" width="70%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+    <iframe class="niconico" width="30%" height="160" src="https://ext.nicovideo.jp/thumb_user/276638" scrolling="no" style="border:solid 1px #CCC;" frameborder="0">みきとP</iframe>
+    </div>    
+    <a class="youtube" href="https://www.youtube.com/channel/UCBR4N5DkgDt3PLTcfJB1iiw">{{ result_name }}のYouTubeチャンネルはこちらから</a>
+    {% elif result_name == '40mP' %}
+    <div class='media'>
+    <iframe src="https://open.spotify.com/embed/artist/69jNq4RZ3PvQJvMeqtdz7O?utm_source=generator" width="70%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+    <iframe class="niconico" width="30%" height="160" src="https://ext.nicovideo.jp/thumb_user/3343223" scrolling="no" style="border:solid 1px #CCC;" frameborder="0">40mP</iframe>
+    </div>
+    <a class="youtube" href="https://www.youtube.com/channel/UCG09qajPDZdPtLsTkW7mJQA">{{ result_name }}のYouTubeチャンネルはこちらから</a>
+    {% elif result_name == 'DECO*27' %}
+    <div class='media'>
+    <iframe src="https://open.spotify.com/embed/artist/7kZTWx6cRLc0TSRPq1XBMP?utm_source=generator" width="70%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+    <iframe class="niconico" width="30%"G height="160" src="https://ext.nicovideo.jp/thumb_user/811012" scrolling="no" style="border:solid 1px #CCC;" frameborder="0">DECO*27</iframe>
+    </div>
+    <a class="youtube" href="https://www.youtube.com/c/DECO27Official/videos">{{ result_name }}のYouTubeチャンネルはこちらから</a>
+    {% endif %}
+<div class="share">
+    <p class='blank'>下のボタンからツイッターで結果を共有してね</p>
+    <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-url="https://www.google.com/webhp?hl=ja&ictx=2&sa=X&ved=0ahUKEwjC2dW11v3zAhVPZt4KHawcDYcQPQgJ" data-hashtags="ボカロPレコメンド" data-text="私がレコメンドされたボカロPは{{ result_name }}でした！！" data-show-count="false">Tweet</a>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+    <a href="{{request.META.HTTP_REFERER}}" class='before_page'>前のページに戻る</a>
+{% endblock %}
