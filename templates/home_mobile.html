@@ -78,7 +78,7 @@
 <body>  
 <h1>ボカロPレコメンド</h1>
 <h2>あなたの好きな曲やアーティスト（もしくはボカロP）からおすすめのボカロPをレコメンドします。</h2>
-<h3>曲名から検索する</h3>
+<h3>曲名から</h3>
 <form action="{% url 'vocalo:form_name_view' %}" method="post">
         {% csrf_token %}
         <div>
@@ -87,7 +87,7 @@
         </div>
 </form>
 
-<h3>アーティストやボカロPから検索する</h3>
+<h3>アーティストやボカロPから</h3>
 <form action="{% url 'vocalo:form_artist_view' %}" method="post">
         {% csrf_token %}
         <div>
