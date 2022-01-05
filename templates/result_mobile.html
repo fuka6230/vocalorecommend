@@ -36,7 +36,7 @@
     {% endif %}
 <div class="share">
     <p class='blank'>下のボタンからツイッターで結果を共有してね</p>
-    <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" data-size="large" class="twitter-share-button" data-url="https://www.google.com/webhp?hl=ja&ictx=2&sa=X&ved=0ahUKEwjC2dW11v3zAhVPZt4KHawcDYcQPQgJ" data-hashtags="ボカロPレコメンド" data-text="私がレコメンドされたボカロPは{{ result_name }}でした！！" data-show-count="false">Tweet</a>
+    <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" data-size="large" class="twitter-share-button" data-url="https://vocalorecomm.herokuapp.com/home/" data-hashtags="ボカロPレコメンド" data-text="私がレコメンドされたボカロPは{{ result_name }}でした！！" data-show-count="false">Tweet</a>
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </div>
     <a href="{{request.META.HTTP_REFERER}}" class='before_page'>前のページに戻る</a>

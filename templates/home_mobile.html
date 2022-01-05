@@ -29,6 +29,7 @@
                         result[i] = tmp[i].split(',');
                     }
                     var picked = result.map(item => item[3]);
+                    picked.shift();
                     const picked2 = Array.from(new Set(picked));
                     var new_picked = [];
                     for (const elem of picked2){
