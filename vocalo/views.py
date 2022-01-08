@@ -1,7 +1,7 @@
 from django.views.generic import TemplateView
 from django.shortcuts import render
 from django.http import HttpResponse
-from vocalo.model_folder import recommend, recom_from_artist
+from vocalo.return_result import recommend, recom_from_artist
 from django_user_agents.utils import get_user_agent
     
 def tracks(request):

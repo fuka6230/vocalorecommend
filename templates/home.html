@@ -11,13 +11,17 @@
         <script>
                 function gettracks() {
                     var req = new XMLHttpRequest(); // HTTPでファイルを読み込むためのXMLHttpRrequestオブジェクトを生成
+                    try{
                     req.open("get", "https://vocalorecomm.herokuapp.com/tracks/", true); // アクセスするファイルを指定
+                    } catch(e) {
+                    req.open("get", "http://127.0.0.1:8000/tracks/", true); 
+                    }finally{
                     req.send(null); // HTTPリクエストの発行
                     var picked_str;
                     req.onload = function(){
 	            convertCSVtoArray(req.responseText); // 渡されるのは読み込んだCSVデータ
                     }
-                }
+                }}
                 
                 // 読み込んだCSVデータを二次元配列に変換する関数convertCSVtoArray()の定義
                 function convertCSVtoArray(str){ // 読み込んだCSVデータが文字列として渡される
@@ -46,13 +50,17 @@
 
                 function getartists() {
                     var req = new XMLHttpRequest(); // HTTPでファイルを読み込むためのXMLHttpRrequestオブジェクトを生成
+                    try {
                     req.open("get", "https://vocalorecomm.herokuapp.com/artists/", true); // アクセスするファイルを指定
+                    } catch(e) {
+                    req.open("get", "http://127.0.0.1:8000/artists/", true);
+                    }finally{
                     req.send(null); // HTTPリクエストの発行
                     var picked_str;
                     req.onload = function(){
 	            convertCSVtoArray2(req.responseText); // 渡されるのは読み込んだCSVデータ
                     }
-                }
+                }}
                 
                 // 読み込んだCSVデータを二次元配列に変換する関数convertCSVtoArray()の定義
                 function convertCSVtoArray2(str){ // 読み込んだCSVデータが文字列として渡される

@@ -1,6 +1,10 @@
 from pathlib import Path
 import django_heroku
 import os
+from socket import gethostname
+import dj_database_url
+
+hostname = gethostname()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -13,7 +17,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-v*dhs=%n@1h7m7a&uy8_&ktb(mjnl0j(oma6o+1#povico!6ax'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+if 'DESKTOP-4K8HADI' in hostname:
+    DEBUG = True
+else:
+    DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -64,16 +71,14 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-from socket import gethostname
-import dj_database_url
-hostname = gethostname()
 
+import dj_database_url
+db_from_env = dj_database_url.config()
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': dj_database_url.config()
 }
+ALLOWED_HOSTS = ['*']
+
 
 
 # Password validation
@@ -131,3 +136,4 @@ STATICFILES_DIRS = (
 django_heroku.settings(locals())
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+

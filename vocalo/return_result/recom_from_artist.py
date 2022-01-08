@@ -1,4 +1,4 @@
-from vocalo.model_folder import recommend
+from vocalo.return_result import recommend
 import sqlite3
 import pandas.io.sql as psql
 import pandas as pd
@@ -9,8 +9,9 @@ import json
 from sklearn import preprocessing
 import tensorflow as tf
 import pickle
-from vocalo.model_folder import make_model
 import numpy as np
+import os
+import psycopg2
 
 
 with open('final_model.pickle', mode='rb') as f:
@@ -19,24 +20,18 @@ with open('final_model.pickle', mode='rb') as f:
 artists_dic = {1: 'ピノキオピー', 2: 'DECO*27', 4: '鬱P',6: 'おてつ！', 7: 'みきとP', 8: '40mP', 9: 'ナユタン星人'}
 
 def artist_to_artist(artist):
-    con = sqlite3.connect('vocalo.db')     
-    cur = con.cursor()
-    cur.execute('drop table items;')
-    cur.execute(
-      'CREATE TABLE items(artist_name text,track_id text,track_name text)'
-    )
-    df = pd.read_csv('all_tracks.csv')
-    df = df.loc[:, 'artist_name':]
-    df = df.drop_duplicates(subset='track_name')
-    df.to_sql('vocalo_tracks', con, if_exists='replace', index=None)
+    DATABASE_URL = os.environ['DATABASE_URL']
+    conn = psycopg2.connect(DATABASE_URL, sslmode='require') 
     try:
       start_time2 = time.perf_counter()
-      sr = psql.read_sql("SELECT * FROM vocalo_tracks where artist_name =:artist ;", con, params={'artist': artist})
+      sr = psql.read_sql("SELECT * FROM items where artist_name =%(artist)s ;", conn, params={'artist': artist})
       sr = sr.loc[:, 'track_id':'track_name']
     except KeyError:
+      conn.close()
       error = 'error'
       return error
     else:
+        conn.close()
         result_artists = {'ピノキオピー': 0, 'DECO*27': 0, '鬱P': 0 , 'おてつ！': 0, 'みきとP': 0, '40mP': 0, 'ナユタン星人': 0}
         for track_id in sr['track_id']:
             start_time3 = time.perf_counter()

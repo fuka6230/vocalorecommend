@@ -6,10 +6,10 @@ import json
 from sklearn import preprocessing
 import tensorflow as tf
 import pickle
-from vocalo.model_folder import make_model
 import numpy as np
-import sqlite3
 import pandas.io.sql as psql
+import os
+import psycopg2
 
 client_id = '18c6546b047443ce9e724ec60d89356b'
 client_secret = '6107b869cacd421bb4db8762c51d19c6'
@@ -80,25 +80,18 @@ def GetAlbumIds(artist_id):
 
 
 def title_to_artist(track_name):
-    con = sqlite3.connect('vocalo.db')     
-    cur = con.cursor()
-    cur.execute('drop table items;')
-    cur.execute(
-      'CREATE TABLE items(artist_name text,track_id text,track_name text)'
-    )
-    df = pd.read_csv('all_tracks.csv')
-    df = df.loc[:, 'artist_name':]
-    df.to_sql('vocalo_tracks', con, if_exists='append', index=None)
-    
+    DATABASE_URL = os.environ['DATABASE_URL']
+    conn = psycopg2.connect(DATABASE_URL, sslmode='require')  
+
     try:
-      sr = psql.read_sql("SELECT * FROM vocalo_tracks where track_name =:track_name ;", con, params={'track_name': track_name})
+      sr = psql.read_sql("SELECT * FROM items where track_name =%(track_name)s ;", conn, params={'track_name': track_name})
       sr = sr.loc[0, :]
     except KeyError:
-      con.close()
+      conn.close()
       error = 'error'
       return error
     else:
-      con.close()
+      conn.close()
       track_id = sr[1]
       track = GetTrackFeatures(track_id)
       df = pd.DataFrame(track, index = ['name', 'album', 'artist', 'release_date', 'length', 'popularity', 'key', 'mode', 'danceability', 'acousticness', 'energy', 'instrumentalness', 'liveness', 'loudness', 'speechiness', 'tempo', 'time_signature', 'valence'])
